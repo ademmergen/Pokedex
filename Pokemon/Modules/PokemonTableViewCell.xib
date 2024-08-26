@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="119" id="KGk-i7-Jjw" customClass="PokemonTableViewCell" customModule="Pokemon" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="389" height="119"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="389" height="119"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zo3-NL-4xm">
+                        <rect key="frame" x="10" y="10" width="369" height="109"/>
+                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#25" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DQE-yn-WNY">
+                        <rect key="frame" x="20" y="49.666666666666664" width="31" height="19.999999999999993"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pikachu" translatesAutoresizingMaskIntoConstraints="NO" id="zee-KZ-ezv">
+                        <rect key="frame" x="299" y="19.666666666666671" width="80" height="80"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="80" id="6bc-86-nje"/>
+                            <constraint firstAttribute="height" constant="80" id="Don-p8-W93"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pikachu" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EXs-Fu-i1v">
+                        <rect key="frame" x="61" y="49.666666666666664" width="65" height="19.999999999999993"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstItem="zee-KZ-ezv" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="A1m-w0-BTK"/>
+                    <constraint firstItem="DQE-yn-WNY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="DFm-86-xhF"/>
+                    <constraint firstItem="DQE-yn-WNY" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ILT-mQ-2yq"/>
+                    <constraint firstItem="Zo3-NL-4xm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="YWB-0g-rEr"/>
+                    <constraint firstItem="EXs-Fu-i1v" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Zy6-DA-X82"/>
+                    <constraint firstAttribute="bottom" secondItem="Zo3-NL-4xm" secondAttribute="bottom" id="aK8-1b-Dkd"/>
+                    <constraint firstItem="EXs-Fu-i1v" firstAttribute="leading" secondItem="DQE-yn-WNY" secondAttribute="trailing" constant="10" id="c4W-iz-IW9"/>
+                    <constraint firstAttribute="trailing" secondItem="Zo3-NL-4xm" secondAttribute="trailing" constant="10" id="glr-4J-8Xn"/>
+                    <constraint firstAttribute="trailing" secondItem="zee-KZ-ezv" secondAttribute="trailing" constant="10" id="lZW-ZT-lJN"/>
+                    <constraint firstItem="Zo3-NL-4xm" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="zEY-x9-aia"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="pokemonContainerView" destination="Zo3-NL-4xm" id="Ixi-Ox-p4o"/>
+                <outlet property="pokemonImageView" destination="zee-KZ-ezv" id="wU3-ey-tpF"/>
+                <outlet property="pokemonNameLabel" destination="EXs-Fu-i1v" id="Imi-WZ-v3K"/>
+                <outlet property="pokemonNumberLabel" destination="DQE-yn-WNY" id="ifh-TB-PCz"/>
+            </connections>
+            <point key="canvasLocation" x="60.305343511450381" y="46.126760563380287"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="pikachu" width="1106" height="1280"/>
+        <systemColor name="secondarySystemBackgroundColor">
+            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

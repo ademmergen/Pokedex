@@ -8,7 +8,6 @@
 import Foundation
 
 struct PokemonDetail: Codable {
-  
   let sprites: Sprites
   let abilities: [Ability]
   let weight: Int

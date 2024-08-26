@@ -7,9 +7,10 @@
 
 import Foundation
 
-class APIService {
-  func fetchPokemons(completion: @escaping (Result<[Pokemon], Error>) -> Void) {
-    guard let url = URL(string: "https://pokeapi.co/api/v2/pokemon?limit=20") else {
+final class APIService {
+  func fetchPokemons(offset: Int, limit: Int, completion: @escaping (Result<[Pokemon], Error>) -> Void) {
+    let urlString = "https://pokeapi.co/api/v2/pokemon?offset=\(offset)&limit=\(limit)"
+    guard let url = URL(string: urlString) else {
       completion(.failure(NSError(domain: "Invalid URL", code: 0, userInfo: nil)))
       return
     }
