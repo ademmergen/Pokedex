@@ -55,9 +55,9 @@ final class PokemonListViewModel {
   }
   
   func getPokemonID(for pokemon: Pokemon) -> Int? {
-      if let index = pokemons.firstIndex(where: { $0.name == pokemon.name }) {
-          return index + 1
-      }
-      return nil
+    if let index = pokemons.firstIndex(where: { $0.name == pokemon.name }) {
+      return index + 1
+    }
+    return nil
   }
 }
