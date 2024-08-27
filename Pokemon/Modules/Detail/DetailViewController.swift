@@ -63,43 +63,49 @@ class DetailViewController: UIViewController {
 }
 
 extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
-  
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-          return 1
-      }
-  
-  func numberOfSections(in tableView: UITableView) -> Int {
-    return 2
-  }
-  
-  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 70
-  }
-  
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    tableView.deselectRow(at: indexPath, animated: true)
-  }
-  
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-      guard let cell = tableView.dequeueReusableCell(withIdentifier: "PokemonDetailCell", for: indexPath) as? PokemonDetailTableViewCell else {
-          return UITableViewCell()
-      }
 
-      switch indexPath.section {
-      case 0:
-          // Weight
-          cell.configure(with: "Weight", value: "\(viewModel.pokemonDetail?.weight ?? 0)")
-      case 1:
-          // Height
-          cell.configure(with: "Height", value: "\(viewModel.pokemonDetail?.height ?? 0)")
-      default:
-          break
-      }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
 
-      return cell
-  }
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 4 // Weight, Height, Abilities, Stats
+    }
 
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 70
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "PokemonDetailCell", for: indexPath) as? PokemonDetailTableViewCell else {
+            return UITableViewCell()
+        }
+
+        switch indexPath.section {
+        case 0:
+            // Weight
+            cell.configure(with: "Weight", value: "\(viewModel.pokemonDetail?.weight ?? 0)")
+        case 1:
+            // Height
+            cell.configure(with: "Height", value: "\(viewModel.pokemonDetail?.height ?? 0)")
+        case 2:
+            // Abilities
+            if let abilities = viewModel.pokemonDetail?.abilities.map({ $0.ability.name }) {
+                cell.configure(with: "Abilities", expandedContent: abilities)
+            }
+        case 3:
+            // Stats
+          if let stats = viewModel.pokemonDetail?.stats.map({ "\($0.stat.name): \($0.base_stat)" }) {
+                cell.configure(with: "Stats", expandedContent: stats)
+            }
+        default:
+            break
+        }
+
+        return cell
+    }
 }
-
-
-
