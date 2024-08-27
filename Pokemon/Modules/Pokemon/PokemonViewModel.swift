@@ -1,5 +1,5 @@
 //
-//  PokemonListViewModel.swift
+//  PokemonViewModel.swift
 //  Pokemon
 //
 //  Created by Adem Mergen on 20.08.2024.
@@ -8,28 +8,28 @@
 import Foundation
 import UIKit
 
-final class PokemonListViewModel {
+final class PokemonViewModel {
+  private let apiService = APIService()
+  private var offset = 0
+  private let limit = 20
+  private var isLoading = false
   
-  private let apiService: APIService
   var pokemons: [Pokemon] = []
   var filteredPokemons: [Pokemon] = []
-  private var offset: Int = 0
-  private let limit: Int = 20
-  private var isLoading: Bool = false
-  
-  init(apiService: APIService = APIService()) {
-    self.apiService = apiService
-  }
   
   func fetchPokemons(completion: @escaping () -> Void) {
     guard !isLoading else { return }
     isLoading = true
     
     // Gecikme
-    DispatchQueue.global().asyncAfter(deadline: .now() + 0.75) {
+    DispatchQueue.global().asyncAfter(deadline: .now() + 0.75) { [weak self] in
+      guard let self = self else { return }
+      
       self.apiService.fetchPokemons(offset: self.offset, limit: self.limit) { [weak self] result in
         guard let self = self else { return }
+        
         self.isLoading = false
+        
         switch result {
         case .success(let newPokemons):
           self.pokemons.append(contentsOf: newPokemons)
@@ -58,6 +58,7 @@ final class PokemonListViewModel {
     if let index = pokemons.firstIndex(where: { $0.name == pokemon.name }) {
       return index + 1
     }
+    
     return nil
   }
 }

@@ -9,7 +9,6 @@ import UIKit
 import Kingfisher
 
 final class PokemonTableViewCell: UITableViewCell {
-  
   @IBOutlet weak var pokemonNumberLabel: UILabel!
   @IBOutlet weak var pokemonNameLabel: UILabel!
   @IBOutlet weak var pokemonImageView: UIImageView!
@@ -25,7 +24,7 @@ final class PokemonTableViewCell: UITableViewCell {
     super.setSelected(selected, animated: animated)
   }
   
-  func configure(with pokemon: Pokemon, using viewModel: PokemonListViewModel) {
+  func configure(with pokemon: Pokemon, using viewModel: PokemonViewModel) {
     pokemonNameLabel.text = pokemon.name.capitalized
     if let pokemonID = viewModel.getPokemonID(for: pokemon) {
       pokemonNumberLabel.text = "#\(pokemonID)"
@@ -34,9 +33,9 @@ final class PokemonTableViewCell: UITableViewCell {
         pokemonImageView.kf.setImage(with: url, placeholder: nil, options: nil, progressBlock: nil) { result in
           switch result {
           case .success(_):
-            print("Image loaded")
+            debugPrint("Image loaded")
           case .failure(_):
-            print("Failed to load image.")
+            debugPrint("Failed to load image.")
           }
         }
       }
