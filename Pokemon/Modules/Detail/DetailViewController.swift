@@ -65,11 +65,11 @@ class DetailViewController: UIViewController {
 extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 1 // Başlık ve detayları göstermek için bir hücre kullanacağız
-  }
+          return 1
+      }
   
   func numberOfSections(in tableView: UITableView) -> Int {
-    return 1
+    return 2
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -81,12 +81,24 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    guard let cell = tableView.dequeueReusableCell(withIdentifier: "PokemonDetailCell", for: indexPath) as? PokemonDetailTableViewCell else {
-      return UITableViewCell()
-    }
-    
-    return cell
+      guard let cell = tableView.dequeueReusableCell(withIdentifier: "PokemonDetailCell", for: indexPath) as? PokemonDetailTableViewCell else {
+          return UITableViewCell()
+      }
+
+      switch indexPath.section {
+      case 0:
+          // Weight
+          cell.configure(with: "Weight", value: "\(viewModel.pokemonDetail?.weight ?? 0)")
+      case 1:
+          // Height
+          cell.configure(with: "Height", value: "\(viewModel.pokemonDetail?.height ?? 0)")
+      default:
+          break
+      }
+
+      return cell
   }
+
 }
 
 
