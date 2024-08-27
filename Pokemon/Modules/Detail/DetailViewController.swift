@@ -80,32 +80,30 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "PokemonDetailCell", for: indexPath) as? PokemonDetailTableViewCell else {
-            return UITableViewCell()
-        }
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+      guard let cell = tableView.dequeueReusableCell(withIdentifier: "PokemonDetailCell", for: indexPath) as? PokemonDetailTableViewCell else {
+          return UITableViewCell()
+      }
 
-        switch indexPath.section {
-        case 0:
-            // Weight
-            cell.configure(with: "Weight", value: "\(viewModel.pokemonDetail?.weight ?? 0)")
-        case 1:
-            // Height
-            cell.configure(with: "Height", value: "\(viewModel.pokemonDetail?.height ?? 0)")
-        case 2:
-            // Abilities
-            if let abilities = viewModel.pokemonDetail?.abilities.map({ $0.ability.name }) {
-                cell.configure(with: "Abilities", expandedContent: abilities)
-            }
-        case 3:
-            // Stats
-          if let stats = viewModel.pokemonDetail?.stats.map({ "\($0.stat.name): \($0.base_stat)" }) {
-                cell.configure(with: "Stats", expandedContent: stats)
-            }
-        default:
-            break
-        }
+      switch indexPath.section {
+      case 0:
+          // Weight
+          cell.configure(with: "Weight", value: "\(viewModel.pokemonDetail?.weight ?? 0)")
+      case 1:
+          // Height
+          cell.configure(with: "Height", value: "\(viewModel.pokemonDetail?.height ?? 0)")
+      case 2:
+          // Abilities
+          let abilityNames = viewModel.pokemonDetail?.abilities.map { $0.ability.name } ?? []
+          cell.configure(with: "Abilities", expandedContent: abilityNames)
+      case 3:
+          // Stats
+          let statNames = viewModel.pokemonDetail?.stats.map { "\($0.stat.name): \($0.base_stat)" } ?? []
+          cell.configure(with: "Stats", expandedContent: statNames)
+      default:
+          break
+      }
 
-        return cell
-    }
+      return cell
+  }
 }
