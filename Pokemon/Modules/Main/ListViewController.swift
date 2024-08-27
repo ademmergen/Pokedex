@@ -48,12 +48,19 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
   }
   
   func numberOfSections(in tableView: UITableView) -> Int {
-    return viewModel.pokemons.count // Her hücre için ayrı bir section
+    return viewModel.filteredPokemons.count // Her hücre için ayrı bir section
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
-    print("Selected: \(viewModel.pokemons[indexPath.section].name)")
+    
+    let selectedPokemon = viewModel.filteredPokemons[indexPath.section]
+    
+    let storyboard = UIStoryboard(name: "Detail", bundle: nil)
+    if let detailVC = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController {
+      detailVC.pokemon = selectedPokemon
+      navigationController?.pushViewController(detailVC, animated: true)
+    }
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -65,8 +72,8 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
       return UITableViewCell()
     }
     
-    let pokemon = viewModel.pokemons[indexPath.section]
-    cell.configure(with: pokemon, at: indexPath.section, using: viewModel)
+    let pokemon = viewModel.filteredPokemons[indexPath.section]
+    cell.configure(with: pokemon, using: viewModel)
     
     cell.selectionStyle = .none
     
@@ -106,6 +113,8 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
 extension ListViewController: UISearchBarDelegate {
   
   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    viewModel.filterPokemons(with: searchText)
+    tableView.reloadData()
   }
   
   func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {

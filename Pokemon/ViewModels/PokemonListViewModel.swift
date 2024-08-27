@@ -9,8 +9,10 @@ import Foundation
 import UIKit
 
 final class PokemonListViewModel {
+  
   private let apiService: APIService
   var pokemons: [Pokemon] = []
+  var filteredPokemons: [Pokemon] = []
   private var offset: Int = 0
   private let limit: Int = 20
   private var isLoading: Bool = false
@@ -31,6 +33,7 @@ final class PokemonListViewModel {
         switch result {
         case .success(let newPokemons):
           self.pokemons.append(contentsOf: newPokemons)
+          self.filteredPokemons = self.pokemons
           self.offset += self.limit
           
           completion()
@@ -43,13 +46,18 @@ final class PokemonListViewModel {
     }
   }
   
-  func fetchImage(from url: URL, completion: @escaping (UIImage?) -> Void) {
-    URLSession.shared.dataTask(with: url) { data, response, error in
-      guard let data = data, error == nil else {
-        completion(nil)
-        return
+  func filterPokemons(with searchText: String) {
+    if searchText.isEmpty {
+      filteredPokemons = pokemons
+    } else {
+      filteredPokemons = pokemons.filter { $0.name.contains(searchText.lowercased()) }
+    }
+  }
+  
+  func getPokemonID(for pokemon: Pokemon) -> Int? {
+      if let index = pokemons.firstIndex(where: { $0.name == pokemon.name }) {
+          return index + 1
       }
-      completion(UIImage(data: data))
-    }.resume()
+      return nil
   }
 }

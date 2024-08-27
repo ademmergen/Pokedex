@@ -11,5 +11,6 @@ struct PokemonDetail: Codable {
   let sprites: Sprites
   let abilities: [Ability]
   let weight: Int
+  let height: Int
   let stats: [Stat]
 }
