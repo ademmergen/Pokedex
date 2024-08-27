@@ -18,38 +18,38 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Property" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AZP-uz-dMe">
-                        <rect key="frame" x="20" y="197.66666666666666" width="66" height="21"/>
+                        <rect key="frame" x="20" y="20" width="66" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Value" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lTP-vP-myc">
-                        <rect key="frame" x="583" y="197.66666666666666" width="42" height="21"/>
+                        <rect key="frame" x="583" y="20" width="42" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="uUE-50-iNV">
+                        <rect key="frame" x="0.0" y="48" width="645" height="368"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </tableView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YG1-WQ-XB3">
-                        <rect key="frame" x="590.33333333333337" y="190.66666666666666" width="49.666666666666629" height="35"/>
+                        <rect key="frame" x="590.33333333333337" y="13" width="49.666666666666629" height="35"/>
                         <state key="normal" title="Button"/>
                         <buttonConfiguration key="configuration" style="plain" image="chevron.down.circle" catalog="system" title=""/>
                     </button>
-                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="uUE-50-iNV">
-                        <rect key="frame" x="0.0" y="245.66666666666663" width="645" height="170.33333333333337"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </tableView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="uUE-50-iNV" secondAttribute="trailing" id="0Zw-I1-Dlo"/>
-                    <constraint firstItem="AZP-uz-dMe" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="8fA-C8-AOZ"/>
-                    <constraint firstItem="lTP-vP-myc" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="D3m-yq-VZ3"/>
-                    <constraint firstAttribute="trailing" secondItem="lTP-vP-myc" secondAttribute="trailing" constant="20" id="K7Y-aj-VXc"/>
-                    <constraint firstAttribute="trailing" secondItem="YG1-WQ-XB3" secondAttribute="trailing" constant="5" id="NAy-MA-dhx"/>
-                    <constraint firstItem="AZP-uz-dMe" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="PIg-Hv-jtt"/>
-                    <constraint firstItem="YG1-WQ-XB3" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="RdV-Ru-jZ6"/>
-                    <constraint firstAttribute="bottom" secondItem="uUE-50-iNV" secondAttribute="bottom" id="SRa-0o-081"/>
-                    <constraint firstItem="uUE-50-iNV" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="a7a-zv-AkU"/>
-                    <constraint firstItem="uUE-50-iNV" firstAttribute="top" secondItem="YG1-WQ-XB3" secondAttribute="bottom" constant="20" id="meY-tx-OyZ"/>
+                    <constraint firstItem="lTP-vP-myc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="3Xs-pf-Uhb"/>
+                    <constraint firstItem="YG1-WQ-XB3" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="13" id="Bi9-ce-Vkj"/>
+                    <constraint firstItem="uUE-50-iNV" firstAttribute="top" secondItem="YG1-WQ-XB3" secondAttribute="bottom" id="CR3-MM-m29"/>
+                    <constraint firstAttribute="trailing" secondItem="lTP-vP-myc" secondAttribute="trailing" constant="20" id="CmG-9r-9Fu"/>
+                    <constraint firstAttribute="bottom" secondItem="uUE-50-iNV" secondAttribute="bottom" id="LnW-Sn-DI2"/>
+                    <constraint firstAttribute="trailing" secondItem="YG1-WQ-XB3" secondAttribute="trailing" constant="5" id="Sb1-Vb-awQ"/>
+                    <constraint firstAttribute="trailing" secondItem="uUE-50-iNV" secondAttribute="trailing" id="b6A-6O-arZ"/>
+                    <constraint firstItem="uUE-50-iNV" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="iM1-L7-UmY"/>
+                    <constraint firstItem="AZP-uz-dMe" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="u0P-z7-7IY"/>
+                    <constraint firstItem="AZP-uz-dMe" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="wpY-iJ-rzv"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -59,7 +59,7 @@
                 <outlet property="propertyLabel" destination="AZP-uz-dMe" id="R5V-G4-23j"/>
                 <outlet property="valueLabel" destination="lTP-vP-myc" id="gts-NF-NTq"/>
             </connections>
-            <point key="canvasLocation" x="272.51908396946561" y="183.09859154929578"/>
+            <point key="canvasLocation" x="270.99236641221376" y="183.09859154929578"/>
         </tableViewCell>
     </objects>
     <resources>
