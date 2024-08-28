@@ -10,7 +10,7 @@ import Foundation
 class PokemonDetailViewModel {
   
   var pokemonDetail: PokemonDetail?
-  private let detailService = DetailAPIService()
+  private let detailService = PokemonDetailAPIService()
   
   func fetchPokemonDetail(pokemonID: Int, completion: @escaping (Result<PokemonDetail, Error>) -> Void) {
     detailService.fetchPokemonDetail(pokemonID: pokemonID) { result in

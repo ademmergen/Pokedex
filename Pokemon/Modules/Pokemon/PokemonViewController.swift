@@ -48,8 +48,8 @@ extension PokemonViewController: UITableViewDelegate, UITableViewDataSource {
     
     let selectedPokemon = viewModel.filteredPokemons[indexPath.section]
     
-    let storyboard = UIStoryboard(name: "Detail", bundle: nil)
-    if let detailVC = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController {
+    let storyboard = UIStoryboard(name: "PokemonDetail", bundle: nil)
+    if let detailVC = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as? PokemonDetailViewController {
       detailVC.pokemon = selectedPokemon
       
       navigationController?.pushViewController(detailVC, animated: true)

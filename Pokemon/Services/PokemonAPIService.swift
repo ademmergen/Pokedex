@@ -1,5 +1,5 @@
 //
-//  APIService.swift
+//  PokemonAPIService.swift
 //  Pokemon
 //
 //  Created by Adem Mergen on 20.08.2024.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class APIService {
+final class PokemonAPIService {
   func fetchPokemons(offset: Int, limit: Int, completion: @escaping (Result<[Pokemon], Error>) -> Void) {
     let urlString = "https://pokeapi.co/api/v2/pokemon?offset=\(offset)&limit=\(limit)"
     guard let url = URL(string: urlString) else {

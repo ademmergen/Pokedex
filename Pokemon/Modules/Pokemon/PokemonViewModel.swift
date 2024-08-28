@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 final class PokemonViewModel {
-  private let apiService = APIService()
+  private let apiService = PokemonAPIService()
   private var offset = 0
   private let limit = 20
   private var isLoading = false
