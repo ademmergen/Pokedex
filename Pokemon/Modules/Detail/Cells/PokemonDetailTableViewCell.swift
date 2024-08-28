@@ -21,7 +21,7 @@ class PokemonDetailTableViewCell: UITableViewCell {
     innerTableView.delegate = self
     innerTableView.dataSource = self
     innerTableView.separatorStyle = .none
-    self.selectionStyle = .none
+//    self.selectionStyle = .none
   }
   
   func configure(with title: String, value: String?) {
@@ -54,6 +54,10 @@ extension PokemonDetailTableViewCell: UITableViewDelegate, UITableViewDataSource
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 44
+  }
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    innerTableView.deselectRow(at: indexPath, animated: true)
   }
 }
 

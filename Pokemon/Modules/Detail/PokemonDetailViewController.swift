@@ -32,8 +32,8 @@ class PokemonDetailViewController: UIViewController {
       tableView.delegate = self
       tableView.dataSource = self
 
-      tableView.rowHeight = UITableView.automaticDimension
-      tableView.estimatedRowHeight = 70 // Başlangıç yüksekliği tahmini
+//      tableView.rowHeight = UITableView.automaticDimension
+//      tableView.estimatedRowHeight = 170 // Başlangıç yüksekliği tahmini
 
       if let pokemon = pokemon {
           let pokemonID = extractID(from: pokemon.url)
@@ -76,14 +76,14 @@ extension PokemonDetailViewController: UITableViewDelegate, UITableViewDataSourc
             guard let cell = tableView.cellForRow(at: indexPath) as? PokemonDetailTableViewCell else {
                 return UITableView.automaticDimension
             }
-            return CGFloat(44 * cell.expandedContent.count) + 60
+            return CGFloat(45 * cell.expandedContent.count) + 48
         } else {
-            return 60 // Diğer hücreler için sabit yükseklik
+            return 48 // Diğer hücreler için sabit yükseklik
         }
     }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    tableView.deselectRow(at: indexPath, animated: false)
+    tableView.deselectRow(at: indexPath, animated: true)
   }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
