@@ -21,6 +21,7 @@ class PokemonDetailTableViewCell: UITableViewCell {
     innerTableView.delegate = self
     innerTableView.dataSource = self
     innerTableView.separatorStyle = .none
+    self.selectionStyle = .none
   }
   
   func configure(with title: String, value: String?) {
