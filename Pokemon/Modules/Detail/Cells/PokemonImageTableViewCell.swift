@@ -8,16 +8,16 @@
 import UIKit
 
 class PokemonImageTableViewCell: UITableViewCell {
-
+  
   @IBOutlet weak var pokemonImageView: UIImageView!
   @IBOutlet weak var pokemonNameLabel: UILabel!
   
   override func awakeFromNib() {
-        super.awakeFromNib()
-      
-    }
+    super.awakeFromNib()
+    
+  }
   func configure(with image: UIImage?, name: String?) {
-          pokemonImageView.image = image
-          pokemonNameLabel.text = name
-      }
+    pokemonImageView.image = image
+    pokemonNameLabel.text = name
+  }
 }

@@ -115,8 +115,8 @@
 			children = (
 				6F0E55892C7CA458005C7002 /* PokemonDetailTableViewCell.xib */,
 				6F0E55882C7CA458005C7002 /* PokemonDetailTableViewCell.swift */,
-				6F6FE54D2C7F6F3A00BA02A3 /* PokemonImageTableViewCell.swift */,
 				6F6FE54E2C7F6F3A00BA02A3 /* PokemonImageTableViewCell.xib */,
+				6F6FE54D2C7F6F3A00BA02A3 /* PokemonImageTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
