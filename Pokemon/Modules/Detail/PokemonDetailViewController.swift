@@ -28,12 +28,10 @@ class PokemonDetailViewController: UIViewController {
     // Sadece gerekli hücreleri register edin
     tableView.register(UINib(nibName: "PokemonImageTableViewCell", bundle: nil), forCellReuseIdentifier: "PokemonImageCell")
     tableView.register(UINib(nibName: "PokemonDetailTableViewCell", bundle: nil), forCellReuseIdentifier: "PokemonDetailCell")
+    tableView.register(UINib(nibName: "SpritesTableViewCell", bundle: nil), forCellReuseIdentifier: "SpritesTableViewCell")
     
     tableView.delegate = self
     tableView.dataSource = self
-    
-    //      tableView.rowHeight = UITableView.automaticDimension
-    //      tableView.estimatedRowHeight = 170 // Başlangıç yüksekliği tahmini
     
     if let pokemon = pokemon {
       let pokemonID = extractID(from: pokemon.url)
@@ -61,7 +59,7 @@ class PokemonDetailViewController: UIViewController {
 extension PokemonDetailViewController: UITableViewDelegate, UITableViewDataSource {
   
   func numberOfSections(in tableView: UITableView) -> Int {
-    return 5 // Header hücresi için 1 ekstra bölüm ekleniyor
+    return 6 // Header hücresi için 1 ekstra bölüm ekleniyor
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -72,7 +70,11 @@ extension PokemonDetailViewController: UITableViewDelegate, UITableViewDataSourc
     if indexPath.section == 0 {
       return 200 // Header hücresi için sabit bir yükseklik
     } else if let expandedSection = expandedSection, expandedSection == indexPath.section {
-      // Genişletilmiş hücreler için yüksekliği expandedContent'e göre ayarla
+      if expandedSection == 5 {
+        // Sprites hücresi genişletilmişse
+        return 150 // Örnek yüksekliği, gereksinimlere göre ayarlayın
+      }
+      // Diğer genişletilmiş hücreler için yüksekliği expandedContent'e göre ayarla
       guard let cell = tableView.cellForRow(at: indexPath) as? PokemonDetailTableViewCell else {
         return UITableView.automaticDimension
       }
@@ -82,9 +84,11 @@ extension PokemonDetailViewController: UITableViewDelegate, UITableViewDataSourc
     }
   }
   
+  
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
   }
+
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     if indexPath.section == 0 {
@@ -99,6 +103,35 @@ extension PokemonDetailViewController: UITableViewDelegate, UITableViewDataSourc
         cell.pokemonImageView.kf.setImage(with: imageUrl)
         cell.pokemonNameLabel.text = pokemon.name
       }
+      
+      return cell
+    } else if indexPath.section == 5 {
+      guard let cell = tableView.dequeueReusableCell(withIdentifier: "SpritesTableViewCell", for: indexPath) as? SpritesTableViewCell else {
+        return UITableViewCell()
+      }
+      
+      // Sprites verilerini ayarlayın
+      if let sprites = viewModel.pokemonDetail?.sprites {
+        cell.sprites = [
+          sprites.front_default,
+          sprites.back_default,
+          sprites.front_shiny,
+          sprites.back_shiny,
+          sprites.versions?.generation_ii?.crystal?.back_default,
+          sprites.versions?.generation_ii?.crystal?.back_shiny,
+          sprites.versions?.generation_ii?.crystal?.back_shiny_transparent,
+          sprites.versions?.generation_ii?.crystal?.back_transparent,
+          sprites.versions?.generation_ii?.crystal?.front_default,
+          sprites.versions?.generation_ii?.crystal?.front_shiny,
+          sprites.versions?.generation_ii?.crystal?.front_shiny_transparent,
+          sprites.versions?.generation_ii?.crystal?.front_transparent
+          
+          
+        ].compactMap { $0 }
+      }
+      
+      cell.downButton.tag = indexPath.section
+      cell.downButton.addTarget(self, action: #selector(toggleExpand(_:)), for: .touchUpInside)
       
       return cell
     } else {
@@ -131,6 +164,8 @@ extension PokemonDetailViewController: UITableViewDelegate, UITableViewDataSourc
       return cell
     }
   }
+  
+  
   
   @objc func toggleExpand(_ sender: UIButton) {
     let section = sender.tag

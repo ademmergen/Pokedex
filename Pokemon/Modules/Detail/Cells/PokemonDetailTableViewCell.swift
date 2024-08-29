@@ -53,7 +53,7 @@ extension PokemonDetailTableViewCell: UITableViewDelegate, UITableViewDataSource
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 44
+    return 45
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
