@@ -7,14 +7,14 @@
 
 import UIKit
 
-class SpritesCollectionViewCell: UICollectionViewCell {
+final class SpritesCollectionViewCell: UICollectionViewCell {
   @IBOutlet weak var spritesImageView: UIImageView!
   
   func configure(with url: String) {
     if let imageUrl = URL(string: url) {
       spritesImageView.kf.setImage(with: imageUrl)
     } else {
-      spritesImageView.image = UIImage(named: "placeholder_image") // Yedek bir resim koyabilirsiniz.
+      debugPrint("Invalid URL: \(url)")
     }
   }
 }

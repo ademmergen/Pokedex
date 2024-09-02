@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SpritesTableViewCell: UITableViewCell {
+final class SpritesTableViewCell: UITableViewCell {
   
   @IBOutlet weak var spritesLabel: UILabel!
   @IBOutlet weak var downButton: UIButton!
@@ -16,24 +16,15 @@ class SpritesTableViewCell: UITableViewCell {
   override func awakeFromNib() {
     super.awakeFromNib()
     setupCollectionView()
-    
   }
   
   private func setupCollectionView() {
     collectionView.delegate = self
     collectionView.dataSource = self
     collectionView.register(UINib(nibName: "SpritesCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SpritesCollectionViewCell")
-    
-    collectionView.showsHorizontalScrollIndicator = false
-    
-    let layout = UICollectionViewFlowLayout()
-    layout.scrollDirection = .horizontal
-    layout.minimumLineSpacing = 50
-    layout.itemSize = CGSize(width: 100, height: 100)
-    collectionView.collectionViewLayout = layout
   }
   
-  var sprites: [String] = [] {
+  var sprites: [String] = [] { // sprites dizisi her guncelliginde collectionView'de gosterilen veriler guncellenir.
     didSet {
       collectionView.reloadData()
     }

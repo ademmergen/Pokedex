@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PokemonDetailTableViewCell: UITableViewCell {
+final class PokemonDetailTableViewCell: UITableViewCell {
   
   @IBOutlet weak var propertyLabel: UILabel!
   @IBOutlet weak var valueLabel: UILabel!
@@ -20,13 +20,11 @@ class PokemonDetailTableViewCell: UITableViewCell {
     super.awakeFromNib()
     innerTableView.delegate = self
     innerTableView.dataSource = self
-    innerTableView.separatorStyle = .none
-    //    self.selectionStyle = .none
   }
   
   func configure(with title: String, value: String?) {
     propertyLabel.text = title
-    valueLabel.text = value ?? ""
+    valueLabel.text = value
     valueLabel.isHidden = false
     downButton.isHidden = true
     innerTableView.isHidden = true

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PokemonImageTableViewCell: UITableViewCell {
+final class PokemonImageTableViewCell: UITableViewCell {
   
   @IBOutlet weak var pokemonImageView: UIImageView!
   @IBOutlet weak var pokemonNameLabel: UILabel!
