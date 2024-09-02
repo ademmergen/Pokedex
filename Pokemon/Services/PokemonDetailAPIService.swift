@@ -7,7 +7,7 @@
 
 import Foundation
 
-class PokemonDetailAPIService {
+final class PokemonDetailAPIService {
   func fetchPokemonDetail(pokemonID: Int, completion: @escaping (Result<PokemonDetail, Error>) -> Void) {
     let url = URL(string: "https://pokeapi.co/api/v2/pokemon/\(pokemonID)")!
     URLSession.shared.dataTask(with: url) { data, response, error in
