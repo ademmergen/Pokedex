@@ -146,6 +146,10 @@ extension PokemonDetailViewController: UITableViewDelegate, UITableViewDataSourc
     }
   }
   
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    tableView.deselectRow(at: indexPath, animated: true)
+  }
+  
   @objc func toggleExpand(_ sender: UIButton) {
     let section = sender.tag
     viewModel.toggleExpand(for: section)
