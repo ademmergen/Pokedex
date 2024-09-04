@@ -33,8 +33,8 @@
                         <rect key="frame" x="0.0" y="48" width="645" height="368"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <connections>
-                            <outlet property="dataSource" destination="-1" id="cAb-c5-Mb7"/>
-                            <outlet property="delegate" destination="-1" id="LDA-3t-rpQ"/>
+                            <outlet property="dataSource" destination="KGk-i7-Jjw" id="C1A-Wv-7ns"/>
+                            <outlet property="delegate" destination="KGk-i7-Jjw" id="xpt-yi-5GT"/>
                         </connections>
                     </tableView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YG1-WQ-XB3">

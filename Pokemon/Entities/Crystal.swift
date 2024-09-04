@@ -8,12 +8,26 @@
 import Foundation
 
 struct Crystal: Codable {
-    let back_default: String?
-    let back_shiny: String?
-    let back_shiny_transparent: String?
-    let back_transparent: String?
-    let front_default: String?
-    let front_shiny: String?
-    let front_shiny_transparent: String?
-    let front_transparent: String?
+  let backDefault: String?
+  let backShiny: String?
+  let backShinyTransparent: String?
+  let backTransparent: String?
+  let frontDefault: String?
+  let frontShiny: String?
+  let frontShinyTransparent: String?
+  let frontTransparent: String?
+  
+  enum CrystalCodingKeys: String, CodingKey {
+    case backDefault = "back_default"
+    case backShiny = "back_shiny"
+    case backShinyTransparent = "back_shiny_transparent"
+    case backTransparent = "back_transparent"
+    case frontDefault = "front_default"
+    case frontShiny = "front_shiny"
+    case frontShinyTransparent = "front_shiny_transparent"
+    case frontTransparent = "front_transparent"
+  }
 }
+
+
+

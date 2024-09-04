@@ -8,6 +8,11 @@
 import Foundation
 
 struct Stat: Codable {
-  let base_stat: Int
+  let baseStat: Int
   let stat: StatInfo
+  
+  enum CodingKeys: String, CodingKey {
+    case baseStat = "base_stat"
+    case stat
+  }
 }

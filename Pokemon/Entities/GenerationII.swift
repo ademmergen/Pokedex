@@ -8,5 +8,5 @@
 import Foundation
 
 struct GenerationII: Codable {
-    let crystal: Crystal?
+  let crystal: Crystal?
 }

@@ -8,12 +8,63 @@
 import UIKit
 import Kingfisher
 
+enum PokemonDetailCellType {
+  case singleValue
+  case multipleValue
+  case singleImage
+  case multipleImage
+  
+  func height(isSelected: Bool) -> CGFloat {
+    switch self {
+    case .singleValue:
+      return 48
+    case .multipleValue:
+      return isSelected ? 200 : 48
+    case .singleImage:
+      return 150
+    case .multipleImage:
+      return isSelected ? 200 : 48
+    }
+  }
+  
+  var cellIdentifier: String {
+    switch self {
+    case .singleValue, .multipleValue:
+      return "PokemonDetailCell"
+    case .singleImage:
+      return "PokemonImageCell"
+    case .multipleImage:
+      return "SpritesTableViewCell"
+    }
+  }
+}
+
+final class PokemonDetailCellModel {
+  let type: PokemonDetailCellType
+  let featureName: String
+  let featureValue: String?
+  let expandedContent: [String]?
+  let height: CGFloat
+  var isSelected: Bool = false
+  
+  init(cellType: PokemonDetailCellType, featureName: String, featureValue: String? = nil, expandedContent: [String]? = nil, height: CGFloat) {
+    self.type = cellType
+    self.featureName = featureName
+    self.featureValue = featureValue
+    self.expandedContent = expandedContent
+    self.height = height
+  }
+  
+  var cellHeight: CGFloat {
+    return type.height(isSelected: isSelected)
+  }
+}
+
 final class PokemonDetailViewController: UIViewController {
+  @IBOutlet weak var tableView: UITableView!
   
   var pokemon: Pokemon?
   private let viewModel = PokemonDetailViewModel()
-  
-  @IBOutlet weak var tableView: UITableView!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -24,26 +75,26 @@ final class PokemonDetailViewController: UIViewController {
   
   private func configureTableView() {
     tableView.contentInsetAdjustmentBehavior = .never
-    tableView.register(UINib(nibName: "PokemonImageTableViewCell", bundle: nil), forCellReuseIdentifier: "PokemonImageCell")
-    tableView.register(UINib(nibName: "PokemonDetailTableViewCell", bundle: nil), forCellReuseIdentifier: "PokemonDetailCell")
-    tableView.register(UINib(nibName: "SpritesTableViewCell", bundle: nil), forCellReuseIdentifier: "SpritesTableViewCell")
     
-    tableView.delegate = self
-    tableView.dataSource = self
-    
+    let pokemonImageNib = UINib(nibName: "PokemonImageTableViewCell", bundle: nil)
+    tableView.register(pokemonImageNib, forCellReuseIdentifier: "PokemonImageCell")
+    let pokemonDetailNib = UINib(nibName: "PokemonDetailTableViewCell", bundle: nil)
+    tableView.register(pokemonDetailNib, forCellReuseIdentifier: "PokemonDetailCell")
+    let spritesNib = UINib(nibName: "SpritesTableViewCell", bundle: nil)
+    tableView.register(spritesNib, forCellReuseIdentifier: "SpritesTableViewCell")
   }
+  
   private func loadData() {
-    if let pokemon = pokemon {
-      let pokemonID = viewModel.extractID(from: pokemon.url)
-      
-      viewModel.fetchPokemonDetail(pokemonID: pokemonID) { [weak self] result in
-        DispatchQueue.main.async { [weak self] in
-          switch result {
-          case .success(_):
-            self?.tableView.reloadData()
-          case .failure(let error):
-            debugPrint("Error fetching details: \(error)")
-          }
+    guard let pokemon = pokemon else { return }
+    let pokemonID = viewModel.extractID(from: pokemon.url)
+    
+    viewModel.fetchPokemonDetail(pokemonID: pokemonID) { [weak self] result in
+      DispatchQueue.main.async { [weak self] in
+        switch result {
+        case .success:
+          self?.tableView.reloadData()
+        case .failure(let error):
+          debugPrint("Error fetching details: \(error)")
         }
       }
     }
@@ -51,9 +102,8 @@ final class PokemonDetailViewController: UIViewController {
 }
 
 extension PokemonDetailViewController: UITableViewDelegate, UITableViewDataSource {
-  
   func numberOfSections(in tableView: UITableView) -> Int {
-    return 6
+    return viewModel.cellModels.count
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -61,107 +111,50 @@ extension PokemonDetailViewController: UITableViewDelegate, UITableViewDataSourc
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    if indexPath.section == 0 {
-      return 200
-    } else if viewModel.isSectionExpanded(indexPath.section) {
-      if indexPath.section == 5 {
-        // Sprites hücresi genişletilmişse
-        return 150
-      }
-      // Diğer genişletilmiş hücreler için yüksekliği expandedContent'e göre ayarla
-      guard let cell = tableView.cellForRow(at: indexPath) as? PokemonDetailTableViewCell else {
-        return 48
-      }
-      return CGFloat(45 * cell.expandedContent.count) + 48
-    } else {
-      return 48
-    }
+    return viewModel.cellModels[indexPath.section].cellHeight
   }
-  
+
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    if indexPath.section == 0 {
-      guard let cell = tableView.dequeueReusableCell(withIdentifier: "PokemonImageCell", for: indexPath) as? PokemonImageTableViewCell else {
-        return UITableViewCell()
-      }
+    let cellModel = viewModel.cellModels[indexPath.section]
+    let cell = tableView.dequeueReusableCell(withIdentifier: cellModel.type.cellIdentifier, for: indexPath)
+    
+    switch cellModel.type {
+    case .singleImage:
+      let cell = cell as! PokemonImageTableViewCell
       
-      // Pokemon resmini XIB içindeki UIImageView'a yükle
-      if let pokemon = pokemon {
-        let pokemonID = viewModel.extractID(from: pokemon.url)
-        let imageUrl = URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/\(pokemonID).png")
+      if let imageUrlString = viewModel.pokemonDetail?.sprites.frontDefault, let imageUrl = URL(string: imageUrlString) {
         cell.pokemonImageView.kf.setImage(with: imageUrl)
-        cell.pokemonNameLabel.text = pokemon.name
+      } else {
+        cell.pokemonImageView.image = nil
       }
       
-      return cell
-    } else if indexPath.section == 5 {
-      guard let cell = tableView.dequeueReusableCell(withIdentifier: "SpritesTableViewCell", for: indexPath) as? SpritesTableViewCell else {
-        return UITableViewCell()
-      }
-      
-      if let sprites = viewModel.pokemonDetail?.sprites {
-        cell.sprites = [
-          sprites.front_default,
-          sprites.back_default,
-          sprites.front_shiny,
-          sprites.back_shiny,
-          sprites.versions?.generation_ii?.crystal?.back_default,
-          sprites.versions?.generation_ii?.crystal?.back_shiny,
-          sprites.versions?.generation_ii?.crystal?.back_shiny_transparent,
-          sprites.versions?.generation_ii?.crystal?.back_transparent,
-          sprites.versions?.generation_ii?.crystal?.front_default,
-          sprites.versions?.generation_ii?.crystal?.front_shiny,
-          sprites.versions?.generation_ii?.crystal?.front_shiny_transparent,
-          sprites.versions?.generation_ii?.crystal?.front_transparent
-        ].compactMap { $0 } // nil olanlari temizler
-      }
-      
+      cell.pokemonNameLabel.text = pokemon?.name
+    case .singleValue:
+      let cell = cell as! PokemonDetailTableViewCell
+      cell.propertyLabel.text = cellModel.featureName
+      cell.valueLabel.text = cellModel.featureValue
+      cell.valueLabel.isHidden = false
+      cell.downButton.isHidden = true
+    case .multipleValue:
+      let cell = cell as! PokemonDetailTableViewCell
+      cell.propertyLabel.text = cellModel.featureName
+      cell.downButton.isHidden = false
+      cell.valueLabel.isHidden = true
       cell.downButton.tag = indexPath.section
-      cell.downButton.addTarget(self, action: #selector(toggleExpand(_:)), for: .touchUpInside)
-      
-      return cell
-    } else {
-      guard let cell = tableView.dequeueReusableCell(withIdentifier: "PokemonDetailCell", for: indexPath) as? PokemonDetailTableViewCell else {
-        return UITableViewCell()
-      }
-      
-      switch indexPath.section {
-      case 1:
-        cell.configure(with: "Weight", value: "\(viewModel.pokemonDetail?.weight ?? 0)")
-      case 2:
-        cell.configure(with: "Height", value: "\(viewModel.pokemonDetail?.height ?? 0)")
-      case 3:
-        let abilityNames = viewModel.abilityNames()
-        cell.configure(with: "Abilities", expandedContent: abilityNames)
-      case 4:
-        let statNames = viewModel.statNames()
-        cell.configure(with: "Stats", expandedContent: statNames)
-      default:
-        break
-      }
-      
-      cell.downButton.tag = indexPath.section
-      cell.downButton.addTarget(self, action: #selector(toggleExpand(_:)), for: .touchUpInside)
-      
-      return cell
+    case .multipleImage:
+      let cell = cell as! SpritesTableViewCell
+      cell.spritesLabel.text = cellModel.featureName
+      cell.downButton.isHidden = false
     }
+    
+    return cell
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    tableView.deselectRow(at: indexPath, animated: true)
-  }
-  
-  @objc func toggleExpand(_ sender: UIButton) {
-    let section = sender.tag
-    viewModel.toggleExpand(for: section)
+    let selectedPokemonDetail = viewModel.cellModels[indexPath.section]
+    selectedPokemonDetail.isSelected = !selectedPokemonDetail.isSelected
     
-    tableView.beginUpdates()
-    tableView.reloadSections([section], with: .automatic)
-    tableView.endUpdates()
+    tableView.reloadSections(IndexSet(integer: indexPath.section), with: .none)
+    tableView.reloadRows(at: [indexPath], with: .none)
   }
 }
-
-
-
-
-
-

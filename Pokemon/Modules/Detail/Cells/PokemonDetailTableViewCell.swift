@@ -14,28 +14,10 @@ final class PokemonDetailTableViewCell: UITableViewCell {
   @IBOutlet weak var downButton: UIButton!
   @IBOutlet weak var innerTableView: UITableView!
   
-  var expandedContent: [String] = []
-  
-  override func awakeFromNib() {
-    super.awakeFromNib()
-    innerTableView.delegate = self
-    innerTableView.dataSource = self
-  }
-  
-  func configure(with title: String, value: String?) {
-    propertyLabel.text = title
-    valueLabel.text = value
-    valueLabel.isHidden = false
-    downButton.isHidden = true
-    innerTableView.isHidden = true
-  }
-  
-  func configure(with title: String, expandedContent: [String]) {
-    propertyLabel.text = title
-    valueLabel.isHidden = true
-    downButton.isHidden = false
-    self.expandedContent = expandedContent
-    innerTableView.reloadData()
+  var expandedContent: [String] = [] {
+    didSet {
+      innerTableView.reloadData()
+    }
   }
 }
 
@@ -58,4 +40,3 @@ extension PokemonDetailTableViewCell: UITableViewDelegate, UITableViewDataSource
     innerTableView.deselectRow(at: indexPath, animated: true)
   }
 }
-

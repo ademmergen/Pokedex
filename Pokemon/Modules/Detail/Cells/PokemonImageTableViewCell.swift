@@ -16,8 +16,4 @@ final class PokemonImageTableViewCell: UITableViewCell {
     super.awakeFromNib()
     
   }
-  func configure(with image: UIImage?, name: String?) {
-    pokemonImageView.image = image
-    pokemonNameLabel.text = name
-  }
 }

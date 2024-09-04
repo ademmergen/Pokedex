@@ -8,9 +8,9 @@
 import Foundation
 
 struct Version: Codable {
-  let generation_ii: GenerationII?
+  let generationIi: GenerationII?
   
   enum CodingKeys: String, CodingKey {
-    case generation_ii = "generation-ii"
+    case generationIi = "generation-ii"
   }
 }

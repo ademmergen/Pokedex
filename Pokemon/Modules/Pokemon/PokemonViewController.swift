@@ -11,7 +11,7 @@ final class PokemonViewController: UIViewController {
   @IBOutlet weak var tableView: UITableView!
   @IBOutlet weak var searchBar: UISearchBar!
   
-  let viewModel = PokemonViewModel()
+  private let viewModel = PokemonViewModel()
   private let activityIndicator = UIActivityIndicatorView(style: .medium)
   
   override func viewDidLoad() {
