@@ -133,7 +133,7 @@ extension PokemonDetailViewController: UITableViewDelegate, UITableViewDataSourc
       
     case .multipleImage:
       let cell = cell as! SpritesTableViewCell
-      cell.configure(featureName: cellModel.featureName, isExpanded: cellModel.isSelected)
+      cell.configure(featureName: cellModel.featureName, isExpanded: cellModel.isSelected, sprites: cellModel.expandedContent ?? [])
     }
     
     return cell

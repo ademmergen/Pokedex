@@ -19,6 +19,6 @@ struct Sprites: Codable {
     case backShiny = "back_shiny"
     case frontDefault = "front_default"
     case frontShiny = "front_shiny"
-    case versions
+    case versions 
   }
 }

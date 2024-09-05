@@ -75,10 +75,17 @@ final class PokemonDetailViewModel {
       sprites.backDefault,
       sprites.backShiny,
       sprites.frontDefault,
-      sprites.frontShiny
+      sprites.frontShiny,
+      sprites.versions?.generationIi?.crystal?.backDefault,
+      sprites.versions?.generationIi?.crystal?.backShiny,
+      sprites.versions?.generationIi?.crystal?.backShinyTransparent,
+      sprites.versions?.generationIi?.crystal?.backTransparent,
+      sprites.versions?.generationIi?.crystal?.frontDefault,
+      sprites.versions?.generationIi?.crystal?.frontShiny,
+      sprites.versions?.generationIi?.crystal?.frontShinyTransparent,
+      sprites.versions?.generationIi?.crystal?.frontTransparent
     ]
-    
-    // compactMap ile nil olmayanları filtreler ve döndürür
+
     return spriteList.compactMap { $0 }
   }
 }

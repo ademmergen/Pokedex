@@ -17,7 +17,7 @@ struct Crystal: Codable {
   let frontShinyTransparent: String?
   let frontTransparent: String?
   
-  enum CrystalCodingKeys: String, CodingKey {
+  enum CodingKeys: String, CodingKey {
     case backDefault = "back_default"
     case backShiny = "back_shiny"
     case backShinyTransparent = "back_shiny_transparent"
@@ -28,6 +28,7 @@ struct Crystal: Codable {
     case frontTransparent = "front_transparent"
   }
 }
+
 
 
 
