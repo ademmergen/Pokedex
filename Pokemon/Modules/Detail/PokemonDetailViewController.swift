@@ -21,9 +21,9 @@ enum PokemonDetailCellType {
     case .multipleValue:
       return isSelected ? 200 : 48
     case .singleImage:
-      return 150
+      return 200
     case .multipleImage:
-      return isSelected ? 200 : 48
+      return isSelected ? 150 : 48
     }
   }
   
@@ -44,15 +44,13 @@ final class PokemonDetailCellModel {
   let featureName: String
   let featureValue: String?
   let expandedContent: [String]?
-  let height: CGFloat
   var isSelected: Bool = false
   
-  init(cellType: PokemonDetailCellType, featureName: String, featureValue: String? = nil, expandedContent: [String]? = nil, height: CGFloat) {
-    self.type = cellType
+  init(type: PokemonDetailCellType, featureName: String, featureValue: String? = nil, expandedContent: [String]? = nil) {
+    self.type = type
     self.featureName = featureName
     self.featureValue = featureValue
     self.expandedContent = expandedContent
-    self.height = height
   }
   
   var cellHeight: CGFloat {
@@ -113,38 +111,29 @@ extension PokemonDetailViewController: UITableViewDelegate, UITableViewDataSourc
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return viewModel.cellModels[indexPath.section].cellHeight
   }
-
+  
+  // Her celli kendi sinifi icinde configure ile doldur.
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cellModel = viewModel.cellModels[indexPath.section]
     let cell = tableView.dequeueReusableCell(withIdentifier: cellModel.type.cellIdentifier, for: indexPath)
     
     switch cellModel.type {
+      
     case .singleImage:
       let cell = cell as! PokemonImageTableViewCell
+      cell.configure(with: viewModel.pokemonDetail?.sprites.frontDefault, pokemonName: pokemon?.name)
       
-      if let imageUrlString = viewModel.pokemonDetail?.sprites.frontDefault, let imageUrl = URL(string: imageUrlString) {
-        cell.pokemonImageView.kf.setImage(with: imageUrl)
-      } else {
-        cell.pokemonImageView.image = nil
-      }
-      
-      cell.pokemonNameLabel.text = pokemon?.name
     case .singleValue:
       let cell = cell as! PokemonDetailTableViewCell
-      cell.propertyLabel.text = cellModel.featureName
-      cell.valueLabel.text = cellModel.featureValue
-      cell.valueLabel.isHidden = false
-      cell.downButton.isHidden = true
+      cell.configure(featureName: cellModel.featureName, featureValue: cellModel.featureValue ?? "")
+      
     case .multipleValue:
       let cell = cell as! PokemonDetailTableViewCell
-      cell.propertyLabel.text = cellModel.featureName
-      cell.downButton.isHidden = false
-      cell.valueLabel.isHidden = true
-      cell.downButton.tag = indexPath.section
+      cell.configure(featureName: cellModel.featureName, isExpanded: cellModel.isSelected)
+      
     case .multipleImage:
       let cell = cell as! SpritesTableViewCell
-      cell.spritesLabel.text = cellModel.featureName
-      cell.downButton.isHidden = false
+      cell.configure(featureName: cellModel.featureName, isExpanded: cellModel.isSelected)
     }
     
     return cell

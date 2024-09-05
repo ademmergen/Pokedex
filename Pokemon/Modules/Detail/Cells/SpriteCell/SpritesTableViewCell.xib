@@ -22,8 +22,8 @@
                         <state key="normal" title="Button"/>
                         <buttonConfiguration key="configuration" style="plain" image="chevron.down.circle" catalog="system" title=""/>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sprites" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zdg-45-Ffh">
-                        <rect key="frame" x="20" y="20" width="54" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Text" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zdg-45-Ffh">
+                        <rect key="frame" x="20" y="20" width="32" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -54,7 +54,7 @@
             <connections>
                 <outlet property="collectionView" destination="hZ2-rK-4IS" id="bkc-Ta-VdQ"/>
                 <outlet property="downButton" destination="aid-Pl-8VA" id="f8g-V4-xhN"/>
-                <outlet property="spritesLabel" destination="Zdg-45-Ffh" id="ZsC-F4-aLG"/>
+                <outlet property="propertyLabel" destination="Zdg-45-Ffh" id="ZsC-F4-aLG"/>
             </connections>
             <point key="canvasLocation" x="-140.45801526717557" y="16.549295774647888"/>
         </tableViewCell>

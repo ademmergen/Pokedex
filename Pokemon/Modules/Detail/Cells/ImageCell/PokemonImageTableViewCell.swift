@@ -16,4 +16,13 @@ final class PokemonImageTableViewCell: UITableViewCell {
     super.awakeFromNib()
     
   }
+  
+  func configure(with imageUrlString: String?, pokemonName: String?) {
+    if let imageUrlString = imageUrlString, let imageUrl = URL(string: imageUrlString) {
+      pokemonImageView.kf.setImage(with: imageUrl)
+    } else {
+      pokemonImageView.image = nil
+    }
+    pokemonNameLabel.text = pokemonName ?? "Unknown Pokémon"
+  }
 }

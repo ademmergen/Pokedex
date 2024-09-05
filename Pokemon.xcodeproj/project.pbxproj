@@ -127,16 +127,48 @@
 		6F0E55832C7CA212005C7002 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				6F6FE55F2C88B65500BA02A3 /* ImageCell */,
+				6F6FE5602C88B66B00BA02A3 /* DetailCell */,
+				6F6FE5612C88B68100BA02A3 /* SpriteCell */,
+				6F6FE5622C88B68E00BA02A3 /* CollectionViewCell */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		6F6FE55F2C88B65500BA02A3 /* ImageCell */ = {
+			isa = PBXGroup;
+			children = (
 				6F6FE54E2C7F6F3A00BA02A3 /* PokemonImageTableViewCell.xib */,
 				6F6FE54D2C7F6F3A00BA02A3 /* PokemonImageTableViewCell.swift */,
+			);
+			path = ImageCell;
+			sourceTree = "<group>";
+		};
+		6F6FE5602C88B66B00BA02A3 /* DetailCell */ = {
+			isa = PBXGroup;
+			children = (
 				6F0E55892C7CA458005C7002 /* PokemonDetailTableViewCell.xib */,
 				6F0E55882C7CA458005C7002 /* PokemonDetailTableViewCell.swift */,
+			);
+			path = DetailCell;
+			sourceTree = "<group>";
+		};
+		6F6FE5612C88B68100BA02A3 /* SpriteCell */ = {
+			isa = PBXGroup;
+			children = (
 				6F6FE5582C809B4E00BA02A3 /* SpritesTableViewCell.xib */,
 				6F6FE5572C809B4E00BA02A3 /* SpritesTableViewCell.swift */,
+			);
+			path = SpriteCell;
+			sourceTree = "<group>";
+		};
+		6F6FE5622C88B68E00BA02A3 /* CollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
 				6F6FE55C2C80A0E100BA02A3 /* SpritesCollectionViewCell.xib */,
 				6F6FE55B2C80A0E100BA02A3 /* SpritesCollectionViewCell.swift */,
 			);
-			path = Cells;
+			path = CollectionViewCell;
 			sourceTree = "<group>";
 		};
 		6FFBDDBE2C747CED00AA2308 = {
