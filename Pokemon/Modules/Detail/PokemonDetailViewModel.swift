@@ -58,13 +58,11 @@ final class PokemonDetailViewModel {
     return Int(urlParts.last ?? "") ?? 0
   }
   
-  // Ability isimlerini döndürme işlevi
   private func abilityNames() -> [String] {
     
     return pokemonDetail?.abilities.map { $0.ability.name } ?? []
   }
   
-  // Stat isimlerini döndürme işlevi
   private func statNames() -> [String] {
     
     return pokemonDetail?.stats.map { "\($0.stat.name): \($0.baseStat)" } ?? []

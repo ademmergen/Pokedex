@@ -14,11 +14,7 @@ final class PokemonDetailTableViewCell: UITableViewCell {
   @IBOutlet weak var downButton: UIButton!
   @IBOutlet weak var innerTableView: UITableView!
   
-  private var expandedContent: [String] = [] {
-    didSet {
-      innerTableView.reloadData()
-    }
-  }
+  private var expandedContent: [String] = []
   
   func configure(featureName: String, featureValue: String) {
     propertyLabel.text = featureName
@@ -27,11 +23,12 @@ final class PokemonDetailTableViewCell: UITableViewCell {
     downButton.isHidden = true
   }
   
-  func configure(featureName: String, isExpanded: Bool) {
+  func configure(featureName: String, isExpanded: Bool, expandedContent: [String]) {
     propertyLabel.text = featureName
     valueLabel.isHidden = true
     downButton.isHidden = false
-
+    self.expandedContent = expandedContent
+    innerTableView.reloadData()
   }
 }
 
