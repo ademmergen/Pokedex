@@ -136,6 +136,8 @@ extension PokemonDetailViewController: UITableViewDelegate, UITableViewDataSourc
       cell.configure(featureName: cellModel.featureName, isExpanded: cellModel.isSelected, sprites: cellModel.expandedContent ?? [])
     }
     
+    cell.selectionStyle = .none
+    
     return cell
   }
   

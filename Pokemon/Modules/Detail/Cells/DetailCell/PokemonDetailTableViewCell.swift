@@ -29,6 +29,9 @@ final class PokemonDetailTableViewCell: UITableViewCell {
     downButton.isHidden = false
     self.expandedContent = expandedContent
     innerTableView.reloadData()
+    
+    let buttonImageName = isExpanded ? "chevron.up.circle" : "chevron.down.circle"
+    downButton.setImage(UIImage(systemName: buttonImageName), for: .normal)
   }
 }
 

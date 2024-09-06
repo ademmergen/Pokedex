@@ -23,7 +23,10 @@ final class SpritesTableViewCell: UITableViewCell {
     propertyLabel.text = featureName
     self.sprites = sprites
     collectionView.reloadData()
-    
+
+    let buttonImageName = isExpanded ? "chevron.up.circle" : "chevron.down.circle"
+    let buttonImage = UIImage(systemName: buttonImageName)
+    downButton.setImage(buttonImage, for: .normal)
   }
   
   private func setupCollectionView() {
