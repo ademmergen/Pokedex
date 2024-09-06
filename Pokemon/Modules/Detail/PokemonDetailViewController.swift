@@ -14,12 +14,12 @@ enum PokemonDetailCellType {
   case singleImage
   case multipleImage
   
-  func height(isSelected: Bool) -> CGFloat {
+  func height(isSelected: Bool, expandedContentCount: Int) -> CGFloat {
     switch self {
     case .singleValue:
       return 48
     case .multipleValue:
-      return isSelected ? 200 : 48
+      return isSelected ? CGFloat((expandedContentCount + 1) * 45) : 48
     case .singleImage:
       return 200
     case .multipleImage:
@@ -54,7 +54,8 @@ final class PokemonDetailCellModel {
   }
   
   var cellHeight: CGFloat {
-    return type.height(isSelected: isSelected)
+    return type.height(isSelected: isSelected, expandedContentCount: expandedContent?.count ?? 0)
+    
   }
 }
 
@@ -112,7 +113,6 @@ extension PokemonDetailViewController: UITableViewDelegate, UITableViewDataSourc
     return viewModel.cellModels[indexPath.section].cellHeight
   }
   
-  // Her celli kendi sinifi icinde configure ile doldur.
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cellModel = viewModel.cellModels[indexPath.section]
     let cell = tableView.dequeueReusableCell(withIdentifier: cellModel.type.cellIdentifier, for: indexPath)
