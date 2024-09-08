@@ -28,7 +28,3 @@ struct Crystal: Codable {
     case frontTransparent = "front_transparent"
   }
 }
-
-
-
-

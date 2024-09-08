@@ -14,13 +14,12 @@ final class PokemonViewController: UIViewController {
   private let viewModel = PokemonViewModel()
   private let activityIndicator = UIActivityIndicatorView(style: .medium)
   
+  private let pokemonTableViewCellIdentifier = "PokemonTableViewCell"
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    let nib = UINib(nibName: "PokemonTableViewCell", bundle: nil)
-    tableView.register(nib, forCellReuseIdentifier: "PokemonCell")
-    tableView.tableFooterView = activityIndicator
-    tableView.separatorStyle = .none
+    configurePokemonsTableView()
     
     activityIndicator.hidesWhenStopped = true //Animasyon durduğunda otomatik olarak gizlenmesini sağlar.
     activityIndicator.color = .gray
@@ -30,6 +29,13 @@ final class PokemonViewController: UIViewController {
         self?.tableView.reloadData()
       }
     }
+  }
+  
+  private func configurePokemonsTableView() {
+    let nib = UINib(nibName: pokemonTableViewCellIdentifier, bundle: nil)
+    tableView.register(nib, forCellReuseIdentifier: "PokemonCell")
+    tableView.tableFooterView = activityIndicator
+    tableView.separatorStyle = .none
   }
 }
 

@@ -19,7 +19,7 @@ enum PokemonDetailCellType {
     case .singleValue:
       return 48
     case .multipleValue:
-      return isSelected ? CGFloat((expandedContentCount + 1) * 45) : 48
+      return isSelected ? CGFloat((expandedContentCount + 1) * 48) : 48
     case .singleImage:
       return 200
     case .multipleImage:
@@ -55,7 +55,6 @@ final class PokemonDetailCellModel {
   
   var cellHeight: CGFloat {
     return type.height(isSelected: isSelected, expandedContentCount: expandedContent?.count ?? 0)
-    
   }
 }
 
@@ -63,6 +62,7 @@ final class PokemonDetailViewController: UIViewController {
   @IBOutlet weak var tableView: UITableView!
   
   var pokemon: Pokemon?
+  
   private let viewModel = PokemonDetailViewModel()
   
   override func viewDidLoad() {
@@ -77,8 +77,10 @@ final class PokemonDetailViewController: UIViewController {
     
     let pokemonImageNib = UINib(nibName: "PokemonImageTableViewCell", bundle: nil)
     tableView.register(pokemonImageNib, forCellReuseIdentifier: "PokemonImageCell")
+    
     let pokemonDetailNib = UINib(nibName: "PokemonDetailTableViewCell", bundle: nil)
     tableView.register(pokemonDetailNib, forCellReuseIdentifier: "PokemonDetailCell")
+    
     let spritesNib = UINib(nibName: "SpritesTableViewCell", bundle: nil)
     tableView.register(spritesNib, forCellReuseIdentifier: "SpritesTableViewCell")
   }
@@ -110,7 +112,9 @@ extension PokemonDetailViewController: UITableViewDelegate, UITableViewDataSourc
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return viewModel.cellModels[indexPath.section].cellHeight
+    let cellModel = viewModel.cellModels[indexPath.section]
+    
+    return cellModel.cellHeight
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -118,19 +122,15 @@ extension PokemonDetailViewController: UITableViewDelegate, UITableViewDataSourc
     let cell = tableView.dequeueReusableCell(withIdentifier: cellModel.type.cellIdentifier, for: indexPath)
     
     switch cellModel.type {
-      
     case .singleImage:
       let cell = cell as! PokemonImageTableViewCell
       cell.configure(with: viewModel.pokemonDetail?.sprites.frontDefault, pokemonName: pokemon?.name)
-      
     case .singleValue:
       let cell = cell as! PokemonDetailTableViewCell
       cell.configure(featureName: cellModel.featureName, featureValue: cellModel.featureValue ?? "")
-      
     case .multipleValue:
       let cell = cell as! PokemonDetailTableViewCell
       cell.configure(featureName: cellModel.featureName, isExpanded: cellModel.isSelected, expandedContent: cellModel.expandedContent ?? [""])
-      
     case .multipleImage:
       let cell = cell as! SpritesTableViewCell
       cell.configure(featureName: cellModel.featureName, isExpanded: cellModel.isSelected, sprites: cellModel.expandedContent ?? [])

@@ -14,7 +14,6 @@ final class PokemonImageTableViewCell: UITableViewCell {
   
   override func awakeFromNib() {
     super.awakeFromNib()
-    
   }
   
   func configure(with imageUrlString: String?, pokemonName: String?) {

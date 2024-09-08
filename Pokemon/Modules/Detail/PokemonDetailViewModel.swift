@@ -59,12 +59,10 @@ final class PokemonDetailViewModel {
   }
   
   private func abilityNames() -> [String] {
-    
     return pokemonDetail?.abilities.map { $0.ability.name } ?? []
   }
   
   private func statNames() -> [String] {
-    
     return pokemonDetail?.stats.map { "\($0.stat.name): \($0.baseStat)" } ?? []
   }
 
