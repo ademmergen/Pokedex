@@ -51,7 +51,6 @@ final class PokemonDetailViewModel {
     cellModels.append(spritesCellModel)
   }
   
-  // URL'den ID çıkarma işlevi
   func extractID(from url: String) -> Int {
     let urlParts = url.split(separator: "/")
     

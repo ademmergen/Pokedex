@@ -21,7 +21,7 @@ final class PokemonViewController: UIViewController {
     
     configurePokemonsTableView()
     
-    activityIndicator.hidesWhenStopped = true //Animasyon durduğunda otomatik olarak gizlenmesini sağlar.
+    activityIndicator.hidesWhenStopped = true
     activityIndicator.color = .gray
     
     viewModel.fetchPokemons { [weak self] in
@@ -46,7 +46,7 @@ extension PokemonViewController: UITableViewDelegate, UITableViewDataSource {
   }
   
   func numberOfSections(in tableView: UITableView) -> Int {
-    return viewModel.filteredPokemons.count // Her hücre için ayrı bir section
+    return viewModel.filteredPokemons.count
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -87,15 +87,12 @@ extension PokemonViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     if indexPath.section == viewModel.pokemons.count - 1 {
-      // Activity Indicator'ı Göster
       DispatchQueue.main.async { [weak self] in
         self?.activityIndicator.startAnimating()
       }
-      
-      // Yeni verileri yükle
+    
       viewModel.fetchPokemons { [weak self] in
         DispatchQueue.main.async { [weak self] in
-          // Veri yüklendiğinde Activity Indicator'ı durdur ve gizle
           self?.activityIndicator.stopAnimating()
           self?.tableView.reloadData()
         }
@@ -113,6 +110,6 @@ extension PokemonViewController: UISearchBarDelegate {
   }
   
   func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-    searchBar.resignFirstResponder() // Arama butonuna tıklandığında klavyeyi kapatır
+    searchBar.resignFirstResponder()
   }
 }
