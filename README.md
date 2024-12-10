@@ -1,5 +1,5 @@
 ## Application Video
-![ScreenRecording2024-12-05at20 21 30-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/5a8634d7-2a69-4e31-9923-ce99f5520c0a)
+![ScreenRecording2024-12-05at20 21 30-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/80cedbac-dc17-4b87-a1ba-ecf352bd2b67)
 
 A Pokémon application built using Swift and UIKit, showcasing a list of Pokémon and detailed information about each. The app is designed with a clean architecture and utilizes modern development practices for an intuitive and interactive user experience.
 
